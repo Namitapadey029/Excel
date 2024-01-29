@@ -10,7 +10,7 @@
     <classes>
       <class name="dataprovider3.Data4">
         <methods>
-          <include name="test" invocation-numbers="2"/>
+          <include name="test" invocation-numbers="1"/>
           <include name="last"/>
           <include name="first"/>
         </methods>

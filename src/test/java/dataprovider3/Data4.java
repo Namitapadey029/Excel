@@ -1,10 +1,16 @@
 package dataprovider3;
 
+import java.io.File;
 import java.io.IOException;
+import java.time.Duration;
+import java.util.concurrent.TimeUnit;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.poi.EncryptedDocumentException;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -31,11 +37,13 @@ public class Data4 {
 	public void first() throws InterruptedException {
 		System.setProperty("webdriver.chrome.driver", "C:\\Users\\Namita Pandey\\Downloads\\chromedriver-win64\\chromedriver-win64\\chromedriver.exe");
 		driver = new ChromeDriver();
+		
 	   driver.get("https://demo.nopcommerce.com/register?returnUrl=%2F");
+       driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 
 	}
 	@Test(dataProvider = "getdata")
-	public void test(String firstName, String lastName, String email, String companyName, String password, String confirmPassword) throws InterruptedException {
+	public void test(String firstName, String lastName, String email, String companyName, String password, String confirmPassword) throws InterruptedException, IOException {
 	   WebElement fname = driver.findElement(By.id("FirstName"));
 		  Thread.sleep(2000);
 
@@ -66,6 +74,11 @@ public class Data4 {
 	  confirmPassword1.sendKeys(confirmPassword);
 	  driver.findElement(By.id("register-button")).click();
 	  Thread.sleep(2000);
+	 
+	  TakesScreenshot shots = (TakesScreenshot) driver;
+      File file1 = shots.getScreenshotAs(OutputType.FILE);
+      File file2 = new File("C:\\Users\\Namita Pandey\\Pictures\\take screenshot\\image.png");
+      FileUtils.copyFile(file1, file2);
 
 	}
 
